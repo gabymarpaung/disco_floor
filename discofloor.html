@@ -1,0 +1,74 @@
+<html>
+<head>
+<script src="js/jquery-1.11.3.js"></script>
+<style>
+    .clear{
+    width: 0px;
+    height: 0px;
+    }
+</style>
+</head>
+<body>
+
+
+<script>
+    
+    function hitung() {
+    var x = document.getElementById("angka").value;
+    var unitSize = 50; // width (and height) of one square
+    var unitsWide = x; // number of squares along x-axis
+    var unitsTall = x; // number of squares along y-axis
+    var drawing = $('<div class="drawing"></div>').css({
+        overflow: 'hidden',
+        width: unitSize * unitsWide
+    });
+
+    $( ".drawing" ).remove();
+
+    for (var i = 0; i < unitsWide * unitsTall; i++) {
+       
+        $('<span class="square"></span>').css({
+            display: 'block',
+            float: 'left',
+            width: unitSize,
+            height: unitSize
+        }).appendTo(drawing);
+        intervals();
+        
+    }
+    drawing.appendTo($("body"));
+};
+
+function randomColor() {
+     var randomColor;
+        randomColor = Math.random() * 0x1000000; // 0 < randomColor < 0x1000000
+        randomColor = Math.floor(randomColor); // 0 < randomColor <= 0xFFFFFF
+        randomColor = randomColor.toString(16); // hex representation randomColor
+        randomColor = ("000000" + randomColor).slice(-6); // leading zeros added
+        randomColor = "#" + randomColor; // # added
+        return randomColor;
+}
+
+
+function intervals() {
+    setInterval(function() {
+        $('.square').each(function() {
+            $(this).css({'background-color': randomColor()});
+        });
+    }, 1000);
+}
+
+</script>
+
+<input type="text" id="angka" value="3">
+<button onclick="hitung()">Try it</button>
+
+
+
+
+<script>
+
+</script>
+
+</body>
+</html>
